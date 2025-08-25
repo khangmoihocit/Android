@@ -5,8 +5,38 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity"
-
+    android:gravity="center"
     >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Danh sách bài tập"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        />
+
+    <Button
+        android:id="@+id/btnVN1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BTVN - 01"
+        android:textSize="16sp"
+        android:backgroundTint="@color/teal_700"
+        />
+
+    <Button
+        android:id="@+id/btnTH1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BTTH - 01"
+        android:textSize="16sp"
+        android:backgroundTint="@color/teal_700"
+        />
 
 </LinearLayout>

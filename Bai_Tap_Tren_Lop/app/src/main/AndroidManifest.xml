@@ -12,12 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bai_Tap_Tren_Lop">
         <activity
-            android:label="Home"
+            android:label="Bài tập về nhà 24/8"
+            android:name=".BTVN01Activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:label="Home">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
