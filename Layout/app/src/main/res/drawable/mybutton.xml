@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--bo góc và màu gradient
+-set cho button
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="15dp"/>
+    <gradient
+        android:startColor="@color/teal_700"
+        android:endColor="@color/teal_200"
+        />
+</shape>
