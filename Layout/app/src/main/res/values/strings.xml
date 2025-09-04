@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Layout</string>
+    <string-array name="Country">
+        <item>Viet nam</item>
+        <item>Han</item>
+        <item>Lao</item>
+
+    </string-array>
 </resources>
