@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Ảnh lớn của món ăn -->
+    <ImageView
+        android:id="@+id/ivDetailFoodImage"
+        android:layout_width="0dp"
+
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/img_phobo" />
+
+    <!-- Tên món ăn -->
+    <TextView
+        android:id="@+id/tvDetailFoodName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Phở Bò Đặc Biệt"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivDetailFoodImage" />
+
+    <!-- Giá món ăn -->
+    <TextView
+        android:id="@+id/tvDetailFoodPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="50.000đ"
+        android:textColor="#E53935"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailFoodName"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailFoodName" />
+
+    <!-- Mô tả chi tiết món ăn -->
+    <TextView
+        android:id="@+id/tvDetailFoodDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Một tô phở bò đặc biệt "
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/tvDetailFoodName"
+        app:layout_constraintStart_toStartOf="@id/tvDetailFoodName"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailFoodPrice" />
+
+    <!-- Nút thêm vào giỏ hàng -->
+    <Button
+        android:id="@+id/btnDetailAddToCart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Thêm vào giỏ hàng"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
