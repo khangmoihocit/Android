@@ -6,6 +6,11 @@ public class Cat {
 
     public Cat(){}
 
+    public Cat(int img, String name) {
+        this.img = img;
+        this.name = name;
+    }
+
     public int getImg() {
         return img;
     }
