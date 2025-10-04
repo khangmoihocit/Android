@@ -20,6 +20,11 @@ import java.util.List;
 public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
     private Context context;
     private List<Cat> list;
+    private CatItemListener catItemListener;
+
+    public void setCatItemListener(CatItemListener catItemListener) {
+        this.catItemListener = catItemListener;
+    }
 
     public CatAdapter(Context context, List<Cat> list) {
         this.context = context;
@@ -61,7 +66,7 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
     }
 
     //la 1 item (layout - item.xml)
-    public class CatViewHolder extends RecyclerView.ViewHolder{
+    public class CatViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView img;
         private TextView tv;
 //        private CardView cv;
@@ -71,6 +76,18 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
             img = itemView.findViewById(R.id.img);
             tv = itemView.findViewById(R.id.tv);
 //            cv = itemView.findViewById(R.id.cvCat);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if(catItemListener != null){
+                catItemListener.onItemClick(v, getAdapterPosition()); //có position để ánh xạ ở nơi khác
+            }
+        }
+    }
+
+    public interface CatItemListener{
+        public void onItemClick(View view, int position);
     }
 }
