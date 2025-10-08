@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity">
+
+    <EditText
+        android:id="@+id/edSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tìm ghi chú..."
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:padding="12dp"
+        android:singleLine="true" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/item_note" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        android:contentDescription="Thêm ghi chú mới"
+        android:src="@android:drawable/ic_input_add" />
+
+</LinearLayout>
