@@ -1,7 +1,7 @@
 package com.khangmoihocit.recycleview_crud.model;
 
 public class Cat {
-    private int img;
+    private int img; //position
     private String name, describe;
     private double price;
 

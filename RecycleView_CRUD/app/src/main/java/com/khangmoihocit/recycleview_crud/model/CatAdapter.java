@@ -1,5 +1,6 @@
 package com.khangmoihocit.recycleview_crud.model;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +18,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
-
     private Context context;
     private List<Cat> list;
+    private CatItemListener catItemListener;
 
     public CatAdapter(Context context){
         this.context = context;
         list = new ArrayList<>();
+    }
+
+    public void setCatItemListener(CatItemListener catItemListener){
+        this.catItemListener = catItemListener;
+    }
+
+    public void add(Cat cat){
+        list.add(cat);
+        notifyDataSetChanged(); //làm mới recycle view
+    }
+
+    public void update(int position, Cat cat){
+        list.set(position, cat);
+        notifyDataSetChanged();
+    }
+
+    public Cat get (int position){
+        return list.get(position);
     }
 
 
@@ -36,13 +55,20 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CatViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CatViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Cat cat = list.get(position);
         if(cat == null) return;
         holder.img.setImageResource(cat.getImg());
         holder.tvName.setText(cat.getName());
         holder.tvDescribe.setText(cat.getDescribe());
         holder.tvPrice.setText(cat.getPrice() + "");
+        holder.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -51,7 +77,7 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
         return 0;
     }
 
-    public class CatViewHolder extends RecyclerView.ViewHolder{
+    public class CatViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView img;
         private TextView tvName, tvDescribe, tvPrice;
         private Button btnRemove;
@@ -62,7 +88,19 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
             tvDescribe = itemView.findViewById(R.id.tvDescribe);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             btnRemove = itemView.findViewById(R.id.btnRemove);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(catItemListener != null){
+                catItemListener.onItemClick(v, getAdapterPosition());
+            }
         }
     }// catviewholder
+
+    public interface CatItemListener{
+        void onItemClick(View view, int position);
+    }
 
 }

@@ -62,7 +62,7 @@
             android:id="@+id/btnUpdate"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Add"
+            android:text="Update"
             android:textSize="14dp"
             android:layout_marginLeft="20dp"
             />
