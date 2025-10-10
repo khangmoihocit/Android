@@ -10,6 +10,8 @@ import android.widget.Spinner;
 
 import com.khangmoihocit.recycleview_crud.R;
 
+
+//extends BaseAdapter không cần lớp view holder
 public class SpinnerAdapter extends BaseAdapter {
     private int []imgs = {R.drawable.img, R.drawable.img_1, R.drawable.img_2, R.drawable.img_3};
     private Context context;
