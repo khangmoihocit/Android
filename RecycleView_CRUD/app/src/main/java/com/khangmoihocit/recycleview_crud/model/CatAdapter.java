@@ -1,7 +1,9 @@
 package com.khangmoihocit.recycleview_crud.model;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +67,26 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list.remove(position);
-                notifyDataSetChanged();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Thong bao xoa");
+                builder.setMessage("Ban co chắc muốn xóa mèo " + cat.getName() + " không?");
+                builder.setIcon(R.drawable.remove);
+                builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        list.remove(position);
+                        notifyDataSetChanged();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
     }
