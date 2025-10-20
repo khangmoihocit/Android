@@ -16,7 +16,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private List<User> mListUser;
 
     private IClickItemUser iClickItemUser;
-    public interface IClickItemUser{
+    public interface IClickItemUser{ //handle event in item_adapter
         void updateUser(User user);
     }
     public UserAdapter(IClickItemUser iClickItemUser){

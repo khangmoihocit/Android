@@ -2,6 +2,7 @@ package com.khangmoihocit.a1_sqllite_room;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final int MY_REQUEST_CODE = 10;
     private EditText edtUsername, edtAddress;
     private Button btnAddUser;
     private RecyclerView rcvUser;
@@ -59,9 +61,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void clickUpdateUser(User user){
 
-    }
 
     private void addUser() {
         String username = edtUsername.getText().toString().trim();
@@ -111,5 +111,21 @@ public class MainActivity extends AppCompatActivity {
         edtAddress = findViewById(R.id.edt_address);
         btnAddUser = findViewById(R.id.btn_add_user);
         rcvUser = findViewById(R.id.rcv_user);
+    }
+
+    private void clickUpdateUser(User user){
+        Intent intent = new Intent(MainActivity.this, UpdateActivity.class);//nhan va truyen
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_user", user);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, MY_REQUEST_CODE); //se chay method on activity result
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == MY_REQUEST_CODE && resultCode == Activity.RESULT_OK){ //nhan result tu intent update
+            loadData();
+        }
     }
 }
