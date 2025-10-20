@@ -12,10 +12,13 @@ import java.util.List;
 public interface UserDAO {
 
     @Insert
-    User insertUser(User user);
+    void insertUser(User user);
 
     @Query("select * from users")
     List<User> getAll();
+
+    @Query("select * from users where username=:username")
+    List<User> checkUser(String username);
 }
 
 

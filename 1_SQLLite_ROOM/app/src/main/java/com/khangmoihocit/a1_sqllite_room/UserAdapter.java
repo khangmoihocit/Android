@@ -1,8 +1,10 @@
 package com.khangmoihocit.a1_sqllite_room;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,7 +15,15 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
     private List<User> mListUser;
 
-    private void setData(List<User> list){
+    private IClickItemUser iClickItemUser;
+    public interface IClickItemUser{
+        void updateUser(User user);
+    }
+    public UserAdapter(IClickItemUser iClickItemUser){
+        this.iClickItemUser = iClickItemUser;
+    }
+
+    public void setData(List<User> list){
         this.mListUser = list;
         notifyDataSetChanged();
     }
@@ -31,6 +41,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         if(user == null) return;
         holder.tvUsername.setText(user.getUsername());
         holder.tvAddress.setText(user.getAddress());
+        holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iClickItemUser.updateUser(user);
+            }
+        });
     }
 
     @Override
@@ -41,14 +57,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         return 0;
     }
 
-    public class UserViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvUsername, tvAddress;
+    public static class UserViewHolder extends RecyclerView.ViewHolder{
+        private final TextView tvUsername;
+        private final TextView tvAddress;
+        private final Button btnUpdate;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvUsername = itemView.findViewById(R.id.tv_username);
             tvAddress = itemView.findViewById(R.id.tv_address);
+            btnUpdate = itemView.findViewById(R.id.btn_update);
         }
     }
 }
