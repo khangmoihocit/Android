@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -15,13 +16,19 @@ import com.khangmoihocit.recycleview_crud.model.Cat;
 import com.khangmoihocit.recycleview_crud.model.CatAdapter;
 import com.khangmoihocit.recycleview_crud.model.SpinnerAdapter;
 
-public class MainActivity extends AppCompatActivity implements CatAdapter.CatItemListener {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class MainActivity extends AppCompatActivity implements CatAdapter.CatItemListener,
+        SearchView.OnQueryTextListener {
     private Spinner spinner;
     private RecyclerView recyclerView;
     private CatAdapter catAdapter;
     private EditText eName, eDescribe, ePrice;
     private Button btnAdd, btnUpdate;
-    private int []imgs = {R.drawable.img, R.drawable.img_1, R.drawable.img_2, R.drawable.img_3};
+    private SearchView searchView;
+    private final int []imgs = {R.drawable.img, R.drawable.img_1, R.drawable.img_2, R.drawable.img_3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +122,8 @@ public class MainActivity extends AppCompatActivity implements CatAdapter.CatIte
         eName = findViewById(R.id.edName);
         eDescribe = findViewById(R.id.edDescribe);
         ePrice = findViewById(R.id.edPrice);
+        searchView = findViewById(R.id.search);
+        searchView.setOnQueryTextListener(this);
         btnAdd = findViewById(R.id.btnAdd);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnUpdate.setEnabled(false);
@@ -138,6 +147,30 @@ public class MainActivity extends AppCompatActivity implements CatAdapter.CatIte
                 spinner.setSelection(i);
                 break;
             }
+        }
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        filter(newText);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    public void filter(String keyword){
+        List<Cat> cats = catAdapter.getListBackup().stream()
+                .filter(cat -> cat.getName() != null &&
+                        cat.getName().toLowerCase().contains(keyword.toLowerCase()))
+                .collect(Collectors.toList());
+
+        if(cats.isEmpty()){
+            Toast.makeText(this, "No data found", Toast.LENGTH_LONG).show();
+        }else{
+            catAdapter.filter(cats);
         }
     }
 }

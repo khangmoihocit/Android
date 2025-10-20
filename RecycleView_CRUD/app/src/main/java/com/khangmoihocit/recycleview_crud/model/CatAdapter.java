@@ -21,13 +21,18 @@ import java.util.List;
 
 public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
     private Context context;
+    private List<Cat> listBackup;
     private List<Cat> list;
     private CatItemListener catItemListener;
 
     public CatAdapter(Context context){
         this.context = context;
         list = new ArrayList<>();
+        listBackup = new ArrayList<>();
     }
+
+    public List<Cat> getListBackup(){return this.listBackup;}
+
 
     public void setCatItemListener(CatItemListener catItemListener){
         this.catItemListener = catItemListener;
@@ -35,11 +40,18 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
 
     public void add(Cat cat){
         list.add(cat);
+        listBackup.add(cat);
         notifyDataSetChanged(); //làm mới recycle view
     }
 
     public void update(int position, Cat cat){
         list.set(position, cat);
+        listBackup.set(position, cat);
+        notifyDataSetChanged();
+    }
+
+    public void filter(List<Cat> filterList){
+        this.list = filterList;
         notifyDataSetChanged();
     }
 
@@ -74,6 +86,7 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder>{
                 builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        listBackup.remove(position);
                         list.remove(position);
                         notifyDataSetChanged();
                     }
