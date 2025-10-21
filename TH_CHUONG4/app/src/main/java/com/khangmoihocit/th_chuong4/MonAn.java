@@ -1,6 +1,8 @@
 package com.khangmoihocit.th_chuong4;
 
-public class MonAn {
+import java.io.Serializable;
+
+public class MonAn implements Serializable {
     private int id;
     private String tenMon;
     private String gia;

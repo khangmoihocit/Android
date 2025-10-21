@@ -6,19 +6,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHolder> {
-
     private final Context context;
-    private final ArrayList<MonAn> danhSachMonAn;
+    private List<MonAn> danhSachMonAn;
+    private final IClickItemFood iClickItemFood;
+    public interface IClickItemFood{
+        void showActivityFoodDetail(MonAn monAn);
+    }
 
-    public MonAnAdapter(Context context, ArrayList<MonAn> danhSachMonAn) {
+    public MonAnAdapter(Context context, IClickItemFood iClickItemFood) {
         this.context = context;
-        this.danhSachMonAn = danhSachMonAn;
+        this.iClickItemFood = iClickItemFood;
+    }
+
+    public void setData(List<MonAn> list){
+        this.danhSachMonAn = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,13 +46,11 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHol
         holder.tvFoodName.setText(monAn.getTenMon());
         holder.tvFoodPrice.setText(monAn.getGia());
         holder.ivFoodImage.setImageResource(monAn.getHinhAnh());
-
-        holder.itemView.setOnClickListener(v -> {
-            new AlertDialog.Builder(context)
-                    .setTitle(monAn.getTenMon())
-                    .setMessage(monAn.getMoTa())
-                    .setPositiveButton("Đóng", (dialog, which) -> dialog.dismiss())
-                    .show();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iClickItemFood.showActivityFoodDetail(monAn);
+            }
         });
     }
 
