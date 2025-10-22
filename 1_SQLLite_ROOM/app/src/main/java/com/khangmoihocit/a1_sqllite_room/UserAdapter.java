@@ -10,14 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
     private List<User> mListUser;
 
-    private IClickItemUser iClickItemUser;
+    private final IClickItemUser iClickItemUser;
     public interface IClickItemUser{ //handle event in item_adapter
         void updateUser(User user);
+        void deleteUser(User user);
     }
     public UserAdapter(IClickItemUser iClickItemUser){
         this.iClickItemUser = iClickItemUser;
@@ -39,12 +42,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = mListUser.get(position);
         if(user == null) return;
+
         holder.tvUsername.setText(user.getUsername());
         holder.tvAddress.setText(user.getAddress());
+        holder.tvYear.setText(user.getYear().toString());
+
         holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iClickItemUser.updateUser(user);
+            }
+        });
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iClickItemUser.deleteUser(user);
             }
         });
     }
@@ -60,14 +72,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public static class UserViewHolder extends RecyclerView.ViewHolder{
         private final TextView tvUsername;
         private final TextView tvAddress;
+        private final TextView tvYear;
         private final Button btnUpdate;
+        private final Button btnDelete;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvUsername = itemView.findViewById(R.id.tv_username);
             tvAddress = itemView.findViewById(R.id.tv_address);
+            tvYear = itemView.findViewById(R.id.tv_year);
             btnUpdate = itemView.findViewById(R.id.btn_update);
+            btnDelete = itemView.findViewById(R.id.btn_delete);
         }
     }
 }

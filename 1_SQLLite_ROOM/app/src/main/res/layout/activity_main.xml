@@ -27,6 +27,16 @@
         android:hint="address"
         />
 
+    <EditText
+        android:id="@+id/edt_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:hint="year"
+        />
+
     <Button
         android:id="@+id/btn_add_user"
         android:layout_width="match_parent"
@@ -36,6 +46,31 @@
         android:text="Add user"
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
+        />
+
+    <EditText
+        android:id="@+id/edt_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_border_gray"
+        android:padding="10dp"
+
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+
+        android:textColor="@color/black"
+        android:hint="Enter name"
+        />
+
+    <TextView
+        android:id="@+id/tv_delete_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete All"
+        android:textColor="@color/purple_700"
+        android:layout_gravity="end"
+        android:textSize="16sp"
         />
 
     <androidx.recyclerview.widget.RecyclerView
