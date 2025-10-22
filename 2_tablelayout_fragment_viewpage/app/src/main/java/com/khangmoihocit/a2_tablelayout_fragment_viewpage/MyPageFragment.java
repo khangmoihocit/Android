@@ -1,0 +1,22 @@
+package com.khangmoihocit.a2_tablelayout_fragment_viewpage;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+
+public class MyPageFragment extends Fragment {
+
+    public MyPageFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_my_pages1, container, false);
+    }
+}
