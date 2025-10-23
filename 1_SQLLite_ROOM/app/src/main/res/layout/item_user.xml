@@ -24,7 +24,13 @@
            android:id="@+id/tv_address"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_weight="2"
+           android:text="@string/app_name"
+           />
+
+       <TextView
+           android:id="@+id/tv_year"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
            android:text="@string/app_name"
            />
    </LinearLayout>
@@ -33,9 +39,19 @@
         android:id="@+id/btn_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/btn_delete"
+        android:text="Update"
+        />
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:text="Update"
+        android:text="Delete"
         />
 
 </RelativeLayout>

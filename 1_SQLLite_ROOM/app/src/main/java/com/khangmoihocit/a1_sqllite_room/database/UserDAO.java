@@ -1,6 +1,7 @@
 package com.khangmoihocit.a1_sqllite_room.database;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -23,6 +24,15 @@ public interface UserDAO {
 
     @Update
     void updateUser(User user);
+
+    @Delete
+    void deleteUser(User user);
+
+    @Query("delete from users")
+    void deleteAllUser();
+
+    @Query("select * from users where username like '%'||:username||'%'")
+    List<User> findByUsername(String username);
 }
 
 
