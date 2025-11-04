@@ -11,55 +11,45 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.khangmoihocit.game_racing.databinding.ActivityGameBinding;
 
-
 public class GameActivity extends AppCompatActivity implements SensorEventListener {
 
-    // Khai báo ViewBinding
     private ActivityGameBinding binding;
-
     private SensorManager sm;
-    private Sensor accel;
-    private GameView gameView; // [cite: 93]
+    private Sensor gravitySensor; // Đổi tên cho rõ nghĩa
+    private GameView gameView;
 
-    private float fx = 0, fy = 0, offsetX = 0, offsetY = 0; // [cite: 94]
-    private final float ALPHA = 0.1f; // [cite: 94]
+    // Biến để lưu giá trị cảm biến hiện tại (đã bỏ bộ lọc)
+    private float currentRx = 0, currentRy = 0;
+    // Biến để calibrate
+    private float offsetX = 0, offsetY = 0;
 
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
-
-        // Sử dụng ViewBinding thay vì setContentView(R.layout.activity_game)
         binding = ActivityGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Truy cập view thông qua binding object
         gameView = binding.gameView;
 
-        // [cite: 99]
         int lv = getIntent().getIntExtra("level", 1);
         gameView.setLevel(lv);
         binding.tvLevel.setText("Lv" + lv);
 
-        // [cite: 100]
         binding.btnPause.setOnClickListener(v -> {
             boolean p = gameView.togglePause();
-            // [cite: 101]
             binding.tvPaused.animate().alpha(p ? 1f : 0f).setDuration(150).start();
-            binding.btnPause.setText(p ? "Resume" : "Pause"); // [cite: 102]
+            binding.btnPause.setText(p ? "Resume" : "Pause");
         });
 
-        // [cite: 103]
         binding.btnCalib.setOnClickListener(v -> {
-            offsetX = fx;
-            offsetY = fy;
-            Toast.makeText(this, "Đã calibrate", Toast.LENGTH_SHORT).show(); // [cite: 104]
+            offsetX = currentRx;
+            offsetY = currentRy;
+            Toast.makeText(this, "Đã calibrate", Toast.LENGTH_SHORT).show();
         });
 
-        // [cite: 104]
         gameView.setHudListener(new GameView.HudListener() {
             @Override
             public void onHud(int level, int score, float timeLeft) {
-                // Đây là code cập nhật HUD (giống hệt code cũ)
                 runOnUiThread(() -> {
                     binding.tvLevel.setText("Lv" + level);
                     binding.tvScore.setText("Score: " + score);
@@ -69,60 +59,59 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
 
             @Override
             public void onGameOver(int finalScore) {
-                // Đây là code MỚI khi game kết thúc
                 runOnUiThread(() -> {
-                    // 1. Hiện màn hình Game Over
                     binding.gameOverLayout.setVisibility(View.VISIBLE);
-                    // 2. Cập nhật điểm cuối
                     binding.tvFinalScore.setText("Final Score: " + finalScore);
-
-                    // 3. (Nên làm) Vô hiệu hóa các nút Pause/Calib
                     binding.btnPause.setEnabled(false);
                     binding.btnCalib.setEnabled(false);
-
-                    // 4. (Nên làm) Ẩn chữ "PAUSED" nếu nó đang hiện
                     binding.tvPaused.animate().alpha(0f).setDuration(100).start();
                 });
             }
         });
 
         binding.btnPlayAgain.setOnClickListener(v -> {
-            // Cách đơn giản nhất để chơi lại là khởi động lại Activity này
             recreate();
         });
 
-        sm = (SensorManager) getSystemService(SENSOR_SERVICE); // [cite: 107]
-        accel = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); // [cite: 108]
+        sm = (SensorManager) getSystemService(SENSOR_SERVICE);
+
+        // ============================================
+        // === SỬA LỖI 1: ĐỔI SANG CẢM BIẾN GRAVITY ===
+        // ============================================
+        gravitySensor = sm.getDefaultSensor(Sensor.TYPE_GRAVITY);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        gameView.startLoop(); // [cite: 110]
-        if (accel != null) {
-            sm.registerListener(this, accel, SensorManager.SENSOR_DELAY_GAME); // [cite: 110]
+        if (gravitySensor != null) {
+            sm.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_GAME);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        gameView.stopLoop(); // [cite: 111]
-        if (accel != null) {
-            sm.unregisterListener(this); // [cite: 111]
+        if (gravitySensor != null) {
+            sm.unregisterListener(this);
         }
     }
 
     @Override
     public void onSensorChanged(SensorEvent e) {
-        float rx = e.values[0], ry = e.values[1]; // [cite: 113]
-        // Low-pass filter để làm mượt dữ liệu sensor
-        fx = fx + ALPHA * (rx - fx); // [cite: 113]
-        fy = fy + ALPHA * (ry - fy); // [cite: 113]
-        gameView.onTiltInput(fx - offsetX, fy - offsetY); // [cite: 113]
+        // ============================================
+        // === SỬA LỖI 2: BỎ BỘ LỌC GÂY TRỄ (LAG) ===
+        // ============================================
+
+        // Lấy giá trị X và Y trực tiếp từ cảm biến
+        currentRx = e.values[0]; // Trục X: Nghiêng trái/phải
+        currentRy = e.values[1]; // Trục Y: Nghiêng trước/sau
+
+        // Truyền thẳng giá trị đã calibrate vào GameView
+        gameView.onTiltInput(currentRx - offsetX, currentRy - offsetY);
     }
 
     @Override
-    public void onAccuracyChanged(Sensor s, int a) { // [cite: 115]
+    public void onAccuracyChanged(Sensor s, int a) {
     }
 }
