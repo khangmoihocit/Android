@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">2_tablelayout_fragment_viewpage</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="home_fragment">Home fragment</string>
+    <string name="favorite_fragment">Favorite fragment</string>
+    <string name="my_page_fragment">My page fragment</string>
+</resources>
