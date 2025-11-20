@@ -19,7 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TH_sqlite"
-include(":app")
+rootProject.name = "3_senddata_activity_to_activity"
 include(":app")
  
