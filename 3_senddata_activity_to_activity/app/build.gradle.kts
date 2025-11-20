@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace = "com.khangmoihocit.a1_sqllite_room"
+    namespace = "com.khangmoihocit.a3_senddata_activity_to_activity"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.khangmoihocit.a1_sqllite_room"
-        minSdk = 24
+        applicationId = "com.khangmoihocit.a3_senddata_activity_to_activity"
+        minSdk = 28
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -40,11 +40,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
-    val room_version = "2.8.1"
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-    implementation("androidx.recyclerview:recyclerview:1.4.0")
-    implementation("androidx.recyclerview:recyclerview-selection:1.2.0")
-
 }

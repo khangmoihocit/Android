@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "4_searchview"
+rootProject.name = "3_senddata_activity_to_activity"
 include(":app")
  
