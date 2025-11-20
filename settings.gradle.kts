@@ -19,7 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TH_sqlite"
-include(":app")
+rootProject.name = "4_searchview"
 include(":app")
  

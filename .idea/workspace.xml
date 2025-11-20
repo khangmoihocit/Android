@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1cb92fe-04ec-4f16-83a2-2c02bc6ecf83" name="Changes" comment="">
+    <list default="true" id="5c5e104a-7730-4908-a2f4-b76a57f54b56" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/appInsightsSettings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
@@ -40,7 +40,7 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="TH_sqlite" type="f1a62948:ProjectNode" />
+                <item name="4_searchview" type="f1a62948:ProjectNode" />
               </path>
             </expand>
             <select />
@@ -65,16 +65,16 @@
   }
 }]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
+  "customColor": "",
+  "associatedIndex": 3
 }]]></component>
-  <component name="ProjectId" id="35EgV76yrkan1vG5PJLquomGfcc" />
+  <component name="ProjectId" id="35jctCzamalnsYBWwwCVX4vRo43" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -86,7 +86,7 @@
 }]]></component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="TH_sqlite.app" />
+      <module name="4_searchview.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -160,11 +160,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d1cb92fe-04ec-4f16-83a2-2c02bc6ecf83" name="Changes" comment="" />
-      <created>1762680665702</created>
+      <changelist id="5c5e104a-7730-4908-a2f4-b76a57f54b56" name="Changes" comment="" />
+      <created>1763627133561</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1762680665702</updated>
+      <updated>1763627133561</updated>
     </task>
     <servers />
   </component>
