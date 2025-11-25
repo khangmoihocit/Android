@@ -53,12 +53,11 @@ public class MainActivity extends AppCompatActivity {
         if(notificationManager != null){
             notificationManager.notify(getNotificationId(), notification);
         }
+    }
 
-        //other way
+    //other way
 //        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
 //        notificationManagerCompat.notify(getNotificationId(), notification);
-
-    }
 
     private int getNotificationId(){
         return (int) new Date().getTime();

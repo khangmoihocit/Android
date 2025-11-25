@@ -1,6 +1,9 @@
 package com.khangmoihocit.th_quanlybanhang;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -18,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ProductAdapter productAdapter;
     private List<Product> listProduct;
     private ProductDAO productDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,11 +69,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try{
                     Product product = new Product();
+                    if(edtTitle.getText().toString().isEmpty()){
+                        Toast.makeText(MainActivity.this, "Ten san pham khong duoc trong", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     product.setTitle(edtTitle.getText().toString());
                     product.setDescription(edtDescription.getText().toString());
                     product.setPrice(Double.parseDouble(edtPrice.getText().toString()));
 
                     productDAO.insert(product);
+                    sendNotification("them san pham " + product.getTitle() + " thanh cong");
                     loadData();
                     clearInput();
                 }catch (NumberFormatException ex){
@@ -115,6 +126,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void sendNotification(String content){
+        Notification notification = new NotificationCompat.Builder(this, MyApplication.CHANNEL_ID)
+                .setContentTitle("Thong bao")
+                .setContentText(content)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if(notificationManager != null){
+            notificationManager.notify((int) new Date().getTime(), notification);
+        }
     }
 
     private void searchProduct(String keyword){
