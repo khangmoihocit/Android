@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/edtHoTen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ho ten"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edtChucVu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="chuc vu"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edtLuongCoBan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="luong co ban"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnThem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:enabled="true"
+            android:text="Them" />
+
+        <Button
+            android:id="@+id/btnSua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="sua" />
+    </LinearLayout>
+
+    <SearchView
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="nhập tên hoac chuc vu"
+        android:iconifiedByDefault="false"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvNhanVien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+</LinearLayout>
